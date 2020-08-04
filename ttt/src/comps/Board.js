@@ -157,9 +157,22 @@ class Board extends Component {
       console.log(`rendering next status is ${status}`);
     }
 
+    const statusStyle = {
+      color: "blue",
+      margin: "4px",
+      width: "30px 5px 30px 5px",
+      textAlign: "center",
+    };
+    const resetStyle = {
+      backgroundColor: "green",
+      fontSize: "10px",
+      borderRadius: "4px",
+    };
     return (
       <div>
-        <div className="status">{status}</div>
+        <div>
+          <p style={statusStyle}>{status}</p>
+        </div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -176,7 +189,7 @@ class Board extends Component {
           {this.renderSquare(8)}
         </div>
         <div className="board-row">
-          <button className="btn btn-primary" onClick={this.resetBoard}>
+          <button style={resetStyle} onClick={this.resetBoard}>
             Reset
           </button>
         </div>
