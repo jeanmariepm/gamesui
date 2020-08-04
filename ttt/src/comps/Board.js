@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Square from "./Square";
-import square from "./Square";
 
 class Board extends Component {
   state = {
@@ -80,22 +79,26 @@ class Board extends Component {
     const next_player = player === "X" ? "O" : "X";
 
     // pick a winning/loss-avoiding move if one exist
-    squares.forEach((element, index) => {
-      if (element === ":" && next_val !== best_val) {
-        [player, next_val].forEach((cplayer) => {
-          squares[index] = cplayer;
-          if (this.calculateWinner(squares) === cplayer) {
-            console.log(`${cplayer} wins at ${index} with board ${squares}`);
-            next_val = best_val;
-            action = index;
+    [player, next_player].forEach((cplayer) => {
+      if (next_val === 0) {
+        squares.forEach((element, index) => {
+          if (element === ":") {
+            squares[index] = cplayer;
+            if (this.calculateWinner(squares) === cplayer) {
+              next_val = cplayer === player ? best_val : -best_val;
+              console.log(
+                `${cplayer} wins at ${index} with board ${squares} and next val is ${next_val}`
+              );
+              action = index;
+            }
+            squares[index] = ":";
           }
         });
-        squares[index] = ":";
       }
     });
-
+    console.log(`checked for winner and val is ${next_val}`);
     // pick the best remaining
-    if (next_val !== 0) {
+    if (next_val === 0) {
       let [cnext_val, caction] = [next_val, action];
       squares.forEach((element, index) => {
         if (element === ":") {
