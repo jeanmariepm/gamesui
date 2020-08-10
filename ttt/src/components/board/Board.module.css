@@ -1,0 +1,12 @@
+.Status {
+  color: blue;
+  text-align: center;
+}
+
+.BoardSquare {
+  background-color: black;
+  width: 110px;
+  height: 110px;
+  margin: 5px 5px 5px 5px;
+  border-radius: 10px;
+}
